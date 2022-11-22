@@ -2,18 +2,65 @@
 
 <head>
 	<meta charset="utf-8">
+
 	<script>
-		// TODO: create a handler
+	// TODO: create a handler
     window.addEventListener("load", function(){
-        // TODO: register the handler
-    });
+    // TODO: register the handler
+	// https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
+	const form = document.querySelector('form');
+	
+	function setSearchEngine(){
+		//console.log("Set search engine working")
+		let selectedEngine = document.querySelector("input[name=engine]:checked")
+		let engine = selectedEngine.value
+
+		let actions = {
+			google:'https://www.google.com/',
+			duckDuckGo:'https://duckduckgo.com/',
+			bing:'https://www.bing.com/search',
+			ask:'https://www.ask.com/web'
+		}
+		let url = actions[selectedEngine.value]
+
+		form.action = url
+
+		// let actionURL;
+
+		// if (engine === "google") {
+		// 	actionURL = "https://www.google.com/";
+		// } else if (engine === "duckDuckGo") {
+		// 	actionURL = "https://duckduckgo.com/";
+		// }else if (engine === "bing") {
+		// 	actionURL = "https://www.bing.com/search";
+		// }else if (engine === "ask") {
+		// 	actionURL = "https://www.ask.com/web";
+		// }
+		
+		// form.setAttribute(action, actionURL)
+		// return actionURL
+	}
+	
+	form.addEventListener('submit', setSearchEngine)
+
+	});
 	</script>
 </head>
 
 <body>
 
-	<form id="searchForm">
+	<form id="searchForm" target="_blank" action="" method="GET">
     <!-- TODO: add form elements -->
+
+	<input type="text" class= "q" id="q" name="q" value=""/>
+	<!-- Radio buttons are grouped by name, same name, same group -->
+	<label><input type="radio" name="engine" value="google" checked/>Google</label>
+	<label><input type="radio" name="engine" value="duckDuckGo"/>DuckDuckGo</label>
+	<label><input type="radio" name="engine" value="bing"/>Bing</label>
+	<label><input type="radio" name="engine" value="ask"/>Ask</label>
+	<!-- Button values : https://www.w3schools.com/tags/att_button_value.asp -->
+	<button type="submit" value="Go!">Go!</button>
+
 	</form>
 
 </body>
